@@ -5,6 +5,7 @@ import ParamSlider from './app/ParamSlider';
 import WaveViz from './app/WaveViz';
 import PhasePortrait from './app/PhasePortrait';
 import NewtonRaphson from './app/NewtonRaphson';
+import SurfaceViz from './app/SurfaceViz';
 
 // ═════════════════════════════════════════════════════════════════════════════
 // Main Application
@@ -42,13 +43,13 @@ export default function App() {
     setUserTrajectories(prev => [...prev, ic]);
   }, []);
 
-  // ── Time sync for wave display ─────────────────────────────────────────
+  // ── Time sync for wave and surface display ─────────────────────────────
   const handleTimeUpdate = useCallback((t) => {
     // Throttled update for display only
   }, []);
 
   useEffect(() => {
-    if (vizType !== 'wave') return;
+    if (vizType !== 'wave' && vizType !== 'surface') return;
     const id = setInterval(() => setTime(timeRef.current), 100);
     return () => clearInterval(id);
   }, [vizType]);
@@ -113,6 +114,14 @@ export default function App() {
               onAddTrajectory={addTrajectory}
             />
           )}
+          {vizType === 'surface' && (
+            <SurfaceViz
+              preset={preset}
+              params={params}
+              isPlaying={isPlaying}
+              timeRef={timeRef}
+            />
+          )}
           {vizType === 'algebraic' && (
             <NewtonRaphson
               preset={preset}
@@ -124,6 +133,23 @@ export default function App() {
           {/* ── Floating Controls ───────────────────────────────── */}
           <div style={styles.floatingBar}>
             {vizType === 'wave' && (
+              <>
+                <button onClick={() => setIsPlaying(!isPlaying)} style={styles.playBtn}>
+                  {isPlaying ? '⏸' : '▶'}
+                </button>
+                <span style={styles.timeLabel}>
+                  t = <span style={{ color: C.cyan }}>{time.toFixed(2)}</span>
+                </span>
+                <button
+                  onClick={() => { timeRef.current = 0; setTime(0); }}
+                  style={styles.ghostBtn}
+                >
+                  Reset
+                </button>
+              </>
+            )}
+
+            {vizType === 'surface' && (
               <>
                 <button onClick={() => setIsPlaying(!isPlaying)} style={styles.playBtn}>
                   {isPlaying ? '⏸' : '▶'}

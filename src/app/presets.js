@@ -79,6 +79,27 @@ export const PRESETS = [
     description: 'Chaotic forced oscillator',
   },
   {
+    name: 'Heart Surface',
+    type: 'surface',
+    equation: '(x² + ⁹⁄₄y² + z² − 1)³ − x²z³ − ⁹⁄₂₀₀y²z³ = 0',
+    params: { beat: 1.2, rotSpeed: 0.3, resolution: 80 },
+    sliders: [
+      { key: 'beat',       label: 'Heartbeat rate',    min: 0, max: 3,   step: 0.1 },
+      { key: 'rotSpeed',   label: 'Rotation speed',    min: 0, max: 2,   step: 0.05 },
+      { key: 'resolution', label: 'Mesh resolution',   min: 30, max: 120, step: 10 },
+    ],
+    surfaceFn: (_p) => (x, y, z) => {
+      // Heart equation: (x² + (9/4)y² + z² - 1)³ - x²z³ - (9/200)y²z³ = 0
+      const x2 = x * x;
+      const y2 = y * y;
+      const z2 = z * z;
+      const inner = x2 + (9 / 4) * y2 + z2 - 1;
+      return inner * inner * inner - x2 * z * z * z - (9 / 200) * y2 * z * z * z;
+    },
+    bounds: { x: [-1.5, 1.5], y: [-1.5, 1.5], z: [-1.5, 1.5] },
+    description: 'Implicit heart surface — 3D algebraic equation',
+  },
+  {
     name: 'Lorenz System (x-z)',
     type: 'system',
     equation: 'ẋ=σ(y−x)  ẏ=x(ρ−z)−y  ż=xy−βz',
