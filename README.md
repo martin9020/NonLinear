@@ -2,10 +2,7 @@
 
 An interactive visual solver for nonlinear equations featuring stunning real-time 3D/2D visualizations of wave functions, phase portraits, and root-finding algorithms. Built with React, Three.js, and Canvas 2D.
 
-<video width="100%" controls>
-  <source src="https://collection.cloudinary.com/dvb2y7evb/d923fb05b79778ff361943e0b9f1a5ef" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[Watch Demo Video](https://collection.cloudinary.com/dvb2y7evb/d923fb05b79778ff361943e0b9f1a5ef)
 
 ## Features
 
