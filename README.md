@@ -4,7 +4,7 @@ An interactive visual solver for nonlinear equations featuring stunning real-tim
 
 
 <video width="100%" controls>
-  <source src="https://github.com/martin9020/NonLinear/blob/main/src/Recording%202026-02-14%20160302.mp4" type="video/mp4">
+  <source src="src/Recording 2026-02-14 160302.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
